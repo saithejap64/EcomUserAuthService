@@ -10,4 +10,5 @@ import lombok.Setter;
 public class Role extends BaseModel {
     private String roleName;
     private String description;
+    private boolean isActive;
 }
