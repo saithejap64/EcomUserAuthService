@@ -20,7 +20,7 @@ public class UserControllerExceptionHandler {
     @ExceptionHandler({InvalidCredentialException.class})
     public ResponseEntity handleInvalidCredentialException(InvalidCredentialException ie){
         ExceptionResponseDTO exceptionResponseDTO=new ExceptionResponseDTO(
-                ie.getMessage(), 401
+                ie.getMessage(), 406
         );
         return new ResponseEntity<>(exceptionResponseDTO, HttpStatus.NOT_ACCEPTABLE);
     }

@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<Boolean> logout(@RequestHeader("Authorisation") String authToken){
+    public ResponseEntity<Boolean> logout(@RequestHeader("Authorization") String authToken){
         return ResponseEntity.ok(userService.logout(authToken));
     }
 
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/validate")
-    public ResponseEntity<Boolean> validate(@RequestHeader("Authorisation") String authToken){
+    public ResponseEntity<Boolean> validate(@RequestHeader("Authorization") String authToken){
         return ResponseEntity.ok(userService.validateToken(authToken));
     }
 

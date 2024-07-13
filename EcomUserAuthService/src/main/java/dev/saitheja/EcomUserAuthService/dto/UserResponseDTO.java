@@ -1,5 +1,6 @@
 package dev.saitheja.EcomUserAuthService.dto;
 
+import dev.saitheja.EcomUserAuthService.entity.Role;
 import dev.saitheja.EcomUserAuthService.entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +26,10 @@ public class UserResponseDTO {
         userResponseDTO.name=user.getName();
         userResponseDTO.email=user.getEmailId();
         userResponseDTO.token=user.getToken();
+
         userResponseDTO.roles= new ArrayList<>();
 
+        //traditional method
 //        for (Role role: user.getRole()){
 //            RoleResponseDTO responseDTO=new RoleResponseDTO();
 //            responseDTO.setDesc(role.getDescription());
@@ -36,11 +39,13 @@ public class UserResponseDTO {
         user.getRole().stream()
                 .map(role -> {
                     RoleResponseDTO responseDTO = new RoleResponseDTO();
+                    responseDTO.setRoleId(role.getId());
                     responseDTO.setDesc(role.getDescription());
                     responseDTO.setRole(role.getRoleName());
-                    responseDTO.setActive(role.isActive());
+                    //responseDTO.setActive(role.isActive());
                     return responseDTO;
                 }).forEach(userResponseDTO.roles::add);
+
         return userResponseDTO;
     }
 

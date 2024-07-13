@@ -50,13 +50,13 @@ public class UserServiceImpl implements UserService{
         User savedUser= userRepository.findByEmailId(loginRequestDTO.getEmail()).orElseThrow(
                 ()-> new UserNotFoundException("User Not Found")
         );
-        if(savedUser.getPassword().matches(loginRequestDTO.getPassword())){
+        if(bCryptPasswordEncoder.matches(loginRequestDTO.getPassword(), savedUser.getPassword())){
             String userData= savedUser.getEmailId() + savedUser.getPassword() + LocalDateTime.now();
             String token= bCryptPasswordEncoder.encode(userData);
             savedUser.setToken(token);
         }
         else {
-            throw new InvalidCredentialException();
+            throw new InvalidCredentialException("Invalid credential");
         }
 
         savedUser=userRepository.save(savedUser);
